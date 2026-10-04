@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Andrei & Nico Trip</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#faf7f2;--bg2:#f2ede4;--card:#fff;--ink:#2b2622;--mut:#7a7066;--acc:#b5602c;--acc2:#b5602c;--ok:#5b8a4a;--line:#e6ded2}
+:root[data-theme="dark"]{--bg:#1f1b17;--bg2:#2a251f;--card:#2a251f;--ink:#f1ebe2;--mut:#a89d90;--acc:#d9884f;--acc2:#d9884f;--ok:#8fb47a;--line:#41392f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1b17;--bg2:#2a251f;--card:#2a251f;--ink:#f1ebe2;--mut:#a89d90;--acc:#d9884f;--acc2:#d9884f;--ok:#8fb47a;--line:#41392f}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Nunito,system-ui,sans-serif;min-height:100vh}
+header{padding:28px 20px 12px;text-align:center}
+h1{font:800 34px/1.05 Fraunces,Georgia,serif;margin:0;color:var(--acc)}
+h1 i{font-weight:400;color:var(--ink)}
+.sub{color:var(--mut);margin:6px 0 0;font-size:14px}
+.dates{margin-top:10px;font-size:13px;color:var(--mut)}
+.dates input{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font:inherit}
+.bar{height:8px;background:var(--line);border-radius:8px;margin:14px auto 0;max-width:520px;overflow:hidden}
+.bar b{display:block;height:100%;background:var(--acc);width:0;transition:width .4s}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:14px 16px;scrollbar-width:none}
+.tab{flex:0 0 auto;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:8px 14px;font:700 14px Nunito;cursor:pointer;text-align:center;min-width:64px}
+.tab small{display:block;font-weight:400;color:var(--mut);font-size:11px}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tab.on small{color:#fff}
+main{max-width:620px;margin:0 auto;padding:0 16px 60px}
+.dayh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:6px 2px 10px}
+.dayh h2{font:600 24px Fraunces,serif;margin:0}
+.dayh span{color:var(--mut);font-size:13px}
+.note{background:var(--bg2);border-left:3px solid var(--acc);padding:10px 12px;border-radius:0 10px 10px 0;font-size:13.5px;color:var(--mut);margin-bottom:14px}
+.loc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+.loc.done .nm{text-decoration:line-through;opacity:.55}
+.top{display:flex;gap:12px;align-items:center}
+.chk{width:28px;height:28px;flex:0 0 28px;accent-color:var(--ok)}
+.nm{flex:1;font:600 19px Fraunces,serif;overflow-wrap:anywhere}
+.ic{background:none;border:0;color:var(--mut);font-size:18px;padding:6px;cursor:pointer;border-radius:8px}
+.ic:hover,.btn:hover{filter:brightness(1.15)}
+.tip{font-size:13.5px;color:var(--mut);margin:8px 0 0 40px}
+textarea{width:100%;margin-top:10px;background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:14px Nunito;resize:vertical;min-height:44px}
+.ph{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.ph div{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--bg2)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.ph button{position:absolute;top:3px;right:3px;background:#000a;color:#fff;border:0;border-radius:50%;width:22px;height:22px;cursor:pointer;line-height:1}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:9px 14px;font:700 14px Nunito;cursor:pointer}
+.btn.lnk{background:transparent;color:var(--acc);border:1px solid var(--line);text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--acc);border:1px dashed var(--acc)}
+.row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.add{display:flex;gap:8px;margin-top:6px}
+.add input{flex:1;min-width:0;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit}
+footer{text-align:center;padding:10px 0 30px}
+footer button{background:none;border:0;color:var(--mut);text-decoration:underline;font:13px Nunito;cursor:pointer;margin:0 8px}
+#lb{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:9}
+#lb img{max-width:96%;max-height:92%;border-radius:10px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+<h1>Andrei <i>&</i> Nico Trip</h1>
+<p class="sub">Dolomiți &amp; Veneția · toamnă târzie</p>
+<div class="dates">Plecare: <input type="date" id="start"></div>
+<div class="bar"><b id="prog"></b></div>
+<div class="sub" id="ptxt"></div>
+</header>
+<div class="tabs" id="tabs"></div>
+<main id="main"></main>
+<footer><button onclick="resetAll()">Resetează itinerariul</button></footer>
+<div id="lb" onclick="this.style.display='none'"><img id="lbi" alt=""></div>
+
+<script>
+const uid=()=>Math.random().toString(36).slice(2,9);
+const L=(n,t)=>({id:uid(),name:n,tip:t||'',note:'',done:false});
+const DEF={v:5,start:'2026-11-21',cur:0,days:[
+{t:'Sosire & ziua chill',r:'Aeroport Treviso → ridicare mașină → Dolomiți (~2 h). Fără program strict.',n:'Aterizezi la 14:00, deci cu bagaje și mașină pleci probabil în jur de 15:30–16:00. Apusul e pe la 16:30, așa că o parte din drum o faci pe întuneric: mergi fără grabă, cu cauciucuri de iarnă sau lanțuri la bord. Ziua asta e doar pentru cazare, cină caldă și odihnă.',l:[
+L('Aeroportul Treviso – ridicare mașină','Ține la îndemână permisul, cardul și asigurarea.'),
+L('Check-in la cazare'),
+L('Cortina d’Ampezzo','Doar o plimbare scurtă seara și o cină, fără program.')]},
+{t:'Cinque Torri & Falzarego',r:'Cinque Torri (~20 min de Cortina) → Passo Falzarego (~5 min). Zi mai scurtă, ca să te odihnești după drum.',n:'Zonă de pasuri: în noiembrie sunt obligatorii cauciucuri de iarnă sau lanțuri (15 nov–15 apr). Passo Giau se închide des din cauza zăpezii, așa că am pus Falzarego, mai sigur.',l:[
+L('Cinque Torri (belvedere din drum)','Telecabina e de obicei închisă în noiembrie; vezi stâncile din zona Bai de Dones / Rifugio Scoiattoli.'),
+L('Passo Falzarego','Alternativă la Passo Giau. Verifică starea drumului dimineața.')]},
+{t:'Misurina & Tre Cime',r:'Cortina → Lago di Misurina (~25 min) → Lago d’Antorno (~5 min). Tre Cime se văd chiar de la Misurina. Zonă compactă, aproape de Cortina.',n:'Drumul cu taxă spre Rifugio Auronzo (Tre Cime) e închis iarna, deci vezi masivul de la Misurina și Antorno, unde priveliștea e cea mai bună oricum.',l:[
+L('Lago di Misurina','Tre Cime se oglindesc în lac dacă nu bate vântul.'),
+L('Lago d’Antorno','Lac mic, liniștit, cu păduri de zadă în culori de toamnă.'),
+L('Tre Cime di Lavaredo (privit de la Misurina)','Verifică pe site-ul Auronzo dacă drumul e deschis; dacă nu, rămâi la belvedere.')]},
+{t:'Lacuri din Pustertal',r:'Misurina → Lago di Braies (~1 h) → Lago di Dobbiaco (~30 min) → San Candido (~10 min). Seara dormi spre Bressanone/Chiusa, ca să scurtezi drumul de a doua zi.',n:'Lago di Braies e superb și în noiembrie, dar hotelul și multe cafenele de acolo sunt închise. Vino devreme, e frig și poate fi gheață pe cărare.',l:[
+L('Lago di Braies','Cel mai bun moment: dimineața devreme, lumină blândă și fără lume.'),
+L('Lago di Dobbiaco','Plimbare ușoară pe lângă lac, 40 min.'),
+L('San Candido (Innichen)','Centru medieval; zonă bună de masă de prânz.')]},
+{t:'Val di Funes & Ortisei',r:'Chiusa → Val di Funes (~25 min) → Ortisei (~50 min) → Alpe di Siusi, doar dacă telecabina e deschisă. Ordinea urmează drumul dinspre nord.',n:'Telecabina spre Alpe di Siusi are de obicei pauză de întreținere în noiembrie, deci am pus Val di Funes, accesibilă cu mașina.',l:[
+L('Santa Maddalena, Val di Funes','Biserica cu fundal de Odle, cadrul ideal pentru foto și video.'),
+L('Ortisei','Oraș cu străzi pietonale, sculpturi în lemn.'),
+L('Alpe di Siusi (doar dacă e deschis)','Verifică telecabina Ortisei–Alpe di Siusi înainte; dacă e închisă, sari peste.')]},
+{t:'Pasurile Sella Ronda',r:'Val Gardena (Santa Cristina → Selva, ~15 min) → Passo Sella (~20 min) → Passo Gardena (~30 min). Toate trei sunt la 15–30 min una de alta.',n:'Gardena și Sella sunt de obicei deschise până la prima zăpadă mare. Verifică webcam-urile dimineața și ține lanțurile în portbagaj. Ultima seară: culcă-te devreme, mâine ai drum lung.',l:[
+L('Val Gardena (Selva / Santa Cristina)','Oprire pentru cafea caldă și strudel.'),L('Passo Sella','Priveliște la Sassolungo și Piz Boè.'),L('Passo Gardena')]},
+{t:'Veneția',r:'Pleacă din Val Gardena în jur de 8:30 (~3,5 h până la Treviso), predă mașina la aeroport, apoi autobuz ATVO spre Veneția (~1 h 15 min). Ajungi pe la 14:00. Grand Canal → Rialto → San Marco urmează linia 1.',n:'Noiembrie e sezon de acqua alta: ia încălțăminte impermeabilă și verifică prognoza mareelor (Centro Maree). Apusul e pe la 16:30 și Palazzo Ducale închide de obicei pe la 17:30, deci probabil nu ai timp pentru el: sari peste.',l:[
+L('Predare mașină la aeroportul Treviso','Pe drum spre Veneția; verifică orele de predare ale firmei.'),
+L('Grand Canal','Vaporetto linia 1, ca o plimbare lentă pe canal.'),
+L('Ponte di Rialto','Coboară aici și mergi pe jos spre San Marco.'),
+L('Piazza San Marco','Piața se poate inunda; vezi prognoza.'),
+L('Palazzo Ducale','Opțional, dacă ajungi la timp; rezervă bilet online.')]},
+{t:'Dimineață chill & aeroport',r:'Mic dejun lejer → plimbare scurtă Dorsoduro/Salute → plecare spre aeroportul Treviso în jur de 10:30 (autobuz ATVO de la Piazzale Roma, ~1 h 15 min), ca să fii acolo la 13:00 fără stres.',n:'Dacă preferi să dormi, sari peste plimbare: Salute și Dorsoduro sunt opționale.',l:[
+L('Dorsoduro','Zona cu cafenele, o plimbare liniștită pe Zattere.'),
+L('Basilica della Salute','Intrarea e gratuită; vezi programul liturgic.'),
+L('Plecare spre aeroport (~10:30)','Autobuz ATVO din Piazzale Roma; verifică orarul și ia bilet dinainte.')]}
+]};
+let S;
+try{S=JSON.parse(localStorage.getItem('trip2')||'null')}catch(e){}
+function migrate(o){const n=JSON.parse(JSON.stringify(DEF)),v3=o.v===3,map=o.v===4?[0,1,2,3,4,5,6,7]:v3?[1,2,3,4,5,6,6]:[1,3,2,4,5,6,6],al={'Aeroportul Marco Polo – ridicare mașină':'Aeroportul Treviso – ridicare mașină'},
+ oT=v3?['Cortina & Falzarego','Misurina & Tre Cime','Lacuri din Pustertal','Val di Funes & Ortisei','Pasurile Sella Ronda','Veneția – prima zi','Veneția – ziua a doua']:['Cortina & Falzarego','Lacuri din Pustertal','Misurina & Tre Cime','Ortisei & Val di Funes','Pasurile Sella Ronda','Veneția – prima zi','Veneția – ziua a doua'];
+ const pool=o.days.flatMap((d,i)=>d.l.map(x=>({x,ni:map[i]===undefined?6:map[i]})));
+ n.days.forEach(d=>d.l.forEach(l=>{const k=pool.findIndex(p=>p.x.name===l.name||al[p.x.name]===l.name);if(k>-1){const x=pool.splice(k,1)[0].x;l.id=x.id;l.note=x.note;l.done=x.done}}));
+ pool.forEach(p=>n.days[p.ni].l.push(p.x));
+ n.start=o.start;return n}
+if(!S)S=JSON.parse(JSON.stringify(DEF));
+else if(S.v!==5){S=migrate(S);try{localStorage.setItem('trip2',JSON.stringify(S))}catch(e){}}
+const save=()=>{try{localStorage.setItem('trip2',JSON.stringify(S))}catch(e){}};
+
+// Photos in IndexedDB
+let db;
+const idb=new Promise(r=>{try{const q=indexedDB.open('tripph',1);q.onupgradeneeded=()=>q.result.createObjectStore('p',{keyPath:'id'});q.onsuccess=()=>{db=q.result;r(db)};q.onerror=()=>r(null)}catch(e){r(null)}});
+const tx=(m)=>db.transaction('p',m).objectStore('p');
+const mem={};
+async function loadPhotos(){await idb;if(!db)return;await new Promise(r=>{const q=tx('readonly').getAll();q.onsuccess=()=>{q.result.forEach(p=>(mem[p.loc]=mem[p.loc]||[]).push(p));r()};q.onerror=r})}
+function shrink(file){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1000/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.78))};im.onerror=()=>r(null);im.src=fr.result};fr.readAsDataURL(file)})}
+async function addPhotos(locId,files){
+ for(const f of files){const d=await shrink(f);if(!d)continue;const p={id:uid(),loc:locId,d};(mem[locId]=mem[locId]||[]).push(p);if(db)try{tx('readwrite').put(p)}catch(e){}}
+ render();
+}
+function delPhoto(locId,id){mem[locId]=(mem[locId]||[]).filter(p=>p.id!==id);if(db)try{tx('readwrite').delete(id)}catch(e){};render()}
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function dayDate(i){const d=new Date(S.start+'T12:00:00');d.setDate(d.getDate()+i);return d}
+const fmt=(d,o)=>d.toLocaleDateString('ro-RO',o);
+
+function render(){
+ const all=S.days.flatMap(d=>d.l),done=all.filter(x=>x.done).length;
+ document.getElementById('prog').style.width=(all.length?done/all.length*100:0)+'%';
+ document.getElementById('ptxt').textContent=done+' din '+all.length+' locuri bifate';
+ document.getElementById('tabs').innerHTML=S.days.map((d,i)=>`<button class="tab ${i===S.cur?'on':''}" onclick="S.cur=${i};save();render()">Ziua ${i+1}<small>${fmt(dayDate(i),{day:'numeric',month:'short'})}</small></button>`).join('');
+ const d=S.days[S.cur];
+ document.getElementById('main').innerHTML=`
+ <div class="dayh"><h2>${esc(d.t)}</h2><span>${fmt(dayDate(S.cur),{weekday:'long',day:'numeric',month:'long'})}</span></div>
+ <div class="row" style="margin:0 0 12px"><button class="btn ghost" onclick="renameDay()">Redenumește ziua</button></div>
+ ${d.r?`<div class="note"><b>Traseu:</b> ${esc(d.r)}</div>`:''}
+ ${d.n?`<div class="note">${esc(d.n)}</div>`:''}
+ ${d.l.map((x,j)=>`
+ <div class="loc ${x.done?'done':''}">
+  <div class="top">
+   <input class="chk" type="checkbox" ${x.done?'checked':''} onchange="tog(${j})" aria-label="Văzut">
+   <div class="nm">${esc(x.name)}</div>
+   <button class="ic" onclick="ren(${j})" aria-label="Modifică">✎</button>
+   <button class="ic" onclick="del(${j})" aria-label="Șterge">✕</button>
+  </div>
+  ${x.tip?`<div class="tip">${esc(x.tip)}</div>`:''}
+  <textarea placeholder="Notițe (ora, rezervare, ce ați mâncat...)" onchange="note(${j},this.value)">${esc(x.note)}</textarea>
+  <div class="ph">${(mem[x.id]||[]).map(p=>`<div><img src="${p.d}" onclick="lb(this.src)" alt=""><button onclick="delPhoto('${x.id}','${p.id}')" aria-label="Șterge poza">×</button></div>`).join('')}</div>
+  <div class="row"><label class="btn" style="cursor:pointer">+ Adaugă poze<input type="file" accept="image/*" multiple hidden onchange="addPhotos('${x.id}',this.files)"></label><a class="btn lnk" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(x.name+' Italia')}">Caută poze</a></div>
+ </div>`).join('')}
+ <div class="add"><input id="newloc" placeholder="Adaugă o locație în ziua ${S.cur+1}" onkeydown="if(event.key==='Enter')addLoc()"><button class="btn" onclick="addLoc()">Adaugă</button></div>`;
+}
+function tog(j){S.days[S.cur].l[j].done=!S.days[S.cur].l[j].done;save();render()}
+function note(j,v){S.days[S.cur].l[j].note=v;save()}
+function ren(j){const x=S.days[S.cur].l[j],v=prompt('Numele locației',x.name);if(v&&v.trim()){x.name=v.trim();save();render()}}
+function del(j){const x=S.days[S.cur].l[j];if(confirm('Ștergi „'+x.name+'”?')){S.days[S.cur].l.splice(j,1);save();render()}}
+function addLoc(){const i=document.getElementById('newloc'),v=i.value.trim();if(!v)return;S.days[S.cur].l.push(L(v));save();render()}
+function renameDay(){const d=S.days[S.cur],v=prompt('Titlul zilei',d.t);if(v&&v.trim()){d.t=v.trim();save();render()}}
+function lb(s){document.getElementById('lbi').src=s;document.getElementById('lb').style.display='flex'}
+function resetAll(){if(confirm('Revii la itinerariul inițial? Se șterg bifele și notițele (pozele rămân).')){S=JSON.parse(JSON.stringify(DEF));save();location.reload()}}
+const st=document.getElementById('start');st.value=S.start;st.onchange=()=>{if(st.value){S.start=st.value;save();render()}};
+loadPhotos().then(render);render();
+</script>
+</body>
+</html>
